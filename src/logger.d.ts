@@ -17,7 +17,7 @@ export declare class Logger {
     static readonly LEVEL: typeof LEVEL;
     static readonly global: Logger;
     constructor(moduleName: string);
-    static PARSE_MESSAGE(moduleName: string, level: LEVEL, _logger: Logger): string;
+    static PARSE_MESSAGE(_moduleName: string, _level: LEVEL, _logger: Logger): string;
     static readonly level: (level?: LEVEL) => LEVEL;
     static readonly create: (moduleName: string) => Logger;
     level(level: LEVEL): this;

@@ -18,8 +18,8 @@ export class Logger {
     }
 
     // tslint:disable-next-line
-    public static PARSE_MESSAGE(moduleName: string, level: LEVEL, _logger: Logger): string {
-        return `\t[${LEVEL[level]}]\tModel: ${moduleName} -`;
+    public static PARSE_MESSAGE(_moduleName: string, _level: LEVEL, _logger: Logger): string {
+        return '';
     }
 
     public static readonly level = (level: LEVEL = loggerLevel): LEVEL => loggerLevel = level;
