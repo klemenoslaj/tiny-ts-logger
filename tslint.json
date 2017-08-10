@@ -1,0 +1,13 @@
+{
+    "extends" : [
+        "tslint:recommended",
+        "./node_modules/tslint-microsoft-contrib/tslint.json"
+    ],
+    "rules" : {
+        "no-relative-imports": [false],
+        "no-console": [false]
+    },
+    "rulesDirectory" : [
+        "./node_modules/tslint-microsoft-contrib"
+    ]
+}

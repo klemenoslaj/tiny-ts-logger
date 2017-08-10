@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Logger</title>
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+</head>
+
+<body>
+
+  <div id="container">
+    <h4>Global settings</h4>
+
+    <label for="global-all">ALL/TRACE</label>
+    <input id="global-all" class="global-level" type="radio" name="global" value="0" checked>
+    <label for="global-debug">DEBUG</label>
+    <input id="global-debug" class="global-level" type="radio" name="global" value="1">
+    <label for="global-info">INFO</label>
+    <input id="global-info" class="global-level" type="radio" name="global" value="2">
+    <label for="global-warn">WARN</label>
+    <input id="global-warn" class="global-level" type="radio" name="global" value="3">
+    <label for="global-error">ERROR</label>
+    <input id="global-error" class="global-level" type="radio" name="global" value="4">
+    <label for="global-off">FATAL/OFF</label>
+    <input id="global-off" class="global-level" type="radio" name="global" value="5">
+
+    <br>
+    <br>
+
+    <h4>Module specific settings</h4>
+
+    <table id="modules-table">
+      <thead>
+        <th>Module name</th>
+        <th>All / Trace</th>
+        <th>Debug</th>
+        <th>Info</th>
+        <th>Warn</th>
+        <th>Error</th>
+        <th>Fatal / Off</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <br>
+
+    <h4>Logger debugging</h4>
+
+    <input id="debug-message" type="text" value="Message to log in console.">
+    <button id="trigger-all">LOG</button>
+    <label for="clear-console">Clear console</label>
+    <input id="clear-console" type="checkbox" checked>
+
+    <br>
+
+    <input id="logger-name" type="text">
+    <button id="add-logger">Add logger</button>
+  </div>
+</body>
+
+</html>

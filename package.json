@@ -1,0 +1,30 @@
+{
+  "name": "tiny-logger",
+  "version": "1.0.0",
+  "description": "TypeScript logger with the support of multiple modules at different log levels",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": "Klemen Oslaj",
+  "keywords": [
+    "logger"
+  ],
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.2.2",
+    "html-webpack-plugin": "^2.30.1",
+    "source-map-loader": "^0.2.1",
+    "tslint": "^5.6.0",
+    "tslint-loader": "^3.4.2",
+    "tslint-microsoft-contrib": "^5.0.1",
+    "typescript": "^2.2.1",
+    "webpack": "^3.5.2",
+    "webpack-dev-server": "^2.4.1",
+    "webpack-merge": "^4.1.0"
+  },
+  "scripts": {
+    "build.dev": "webpack --config ./build/webpack.dev.js --progress",
+    "build.prod": "webpack --config ./build/webpack.prod.js --progress",
+    "build.watch.dev": "webpack --config ./build/webpack.dev.js --progress --watch",
+    "build.watch.prod": "webpack --config ./build/webpack.prod.js --progress --watch",
+    "start": "NODE_ENV=dev node ./build/server.js"
+  }
+}
