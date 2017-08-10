@@ -1,5 +1,5 @@
 /**
- * Tiny Logger
+ * Tiny TypeScript Logger
  * v1.0.0
  */
 export type consoleArgument = string | number | boolean | symbol | object;

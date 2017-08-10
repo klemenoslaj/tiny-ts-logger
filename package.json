@@ -1,5 +1,5 @@
 {
-  "name": "tiny-logger",
+  "name": "tiny-ts-logger",
   "version": "1.0.0",
   "description": "TypeScript logger with the support of multiple modules at different log levels",
   "main": "dist/index.js",
