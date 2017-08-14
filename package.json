@@ -1,9 +1,9 @@
 {
   "name": "tiny-ts-logger",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "TypeScript logger with the support of multiple modules at different log levels",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "Klemen Oslaj",
   "keywords": [
