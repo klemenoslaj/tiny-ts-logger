@@ -2,7 +2,7 @@
  * Testing and demonstration of Tiny Logger
  */
 
-import { Logger } from './logger';
+import { Logger } from './index';
 
 const table: HTMLTableElement = <HTMLTableElement>document.getElementById('modules-table');
 const triggerAllButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('trigger-all');

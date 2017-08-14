@@ -6,7 +6,6 @@ export type consoleArgument = string | number | boolean | symbol | object;
 export enum LEVEL { OFF = 5, ALL = 0, TRACE = 0, DEBUG, INFO, WARN, ERROR, FATAL }
 const modules: {[moduleName: string]: Logger} = {};
 const modulesMap: Map<Logger, { level: LEVEL; moduleName: string; }> = new Map();
-
 let loggerLevel: LEVEL = LEVEL.ALL;
 
 export class Logger {

@@ -4,7 +4,7 @@ const CommonConfig = require('./webpack.common.js');
 
 module.exports = Merge(CommonConfig, {
     entry: {
-        'index': './src/logger.ts'
+        'index': './src/index.ts'
     },
     output: {
         library: "Logger",

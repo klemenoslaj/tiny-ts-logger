@@ -1,0 +1,9 @@
+./build
+./node_modules
+./styles
+./src
+.gitignore
+.npmignore
+tsconfig.json
+tslint.json
+yarn.lock
