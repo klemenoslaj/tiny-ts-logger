@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const Merge = require('webpack-merge');
 const CommonConfig = require('./webpack.common.js');
@@ -9,7 +10,8 @@ module.exports = Merge(CommonConfig, {
     },
     output: {
         filename: '[name].bundle.js',
-        sourceMapFilename: '[name].map'
+        sourceMapFilename: '[name].map',
+        path: path.join(__dirname, '../docs')
     },
     devtool: 'source-map',
     devServer: {

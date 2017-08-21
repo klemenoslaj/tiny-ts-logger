@@ -1,9 +1,6 @@
 const path = require('path');
 
 module.exports = {
-    output: {
-        path: path.join(__dirname, '../dist')
-    },
     resolve: {
         extensions: ['.ts', '.js', '.json'],
         modules: [path.join(__dirname, 'src'), 'node_modules']
