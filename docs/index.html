@@ -1,12 +1,102 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>tiny-ts-logger | JavaScript logger with the support of multiple modules at different log levels</title>
+  <title>Logger</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-size: 10px;
+    }
+
+    #container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: lightgray;
+      border: 0.1rem solid gray;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+
+    #container table,
+    th,
+    td {
+      border: 0.1rem solid gray;
+    }
+
+    #container input[type=text] {
+      width: 20rem;
+    }
+
+    #container h4 {
+      margin: 0.5rem 0;
+    }
+  </style>
 </head>
 
 <body>
-Example
-</body>
+  <h1>Playground</h1>
+
+  <div id="container">
+    <h4>Global settings</h4>
+
+    <label for="global-all">ALL/TRACE</label>
+    <input id="global-all" class="global-level" type="radio" name="global" value="0" checked>
+    <label for="global-debug">DEBUG</label>
+    <input id="global-debug" class="global-level" type="radio" name="global" value="1">
+    <label for="global-info">INFO</label>
+    <input id="global-info" class="global-level" type="radio" name="global" value="2">
+    <label for="global-warn">WARN</label>
+    <input id="global-warn" class="global-level" type="radio" name="global" value="3">
+    <label for="global-error">ERROR</label>
+    <input id="global-error" class="global-level" type="radio" name="global" value="4">
+    <label for="global-off">FATAL/OFF</label>
+    <input id="global-off" class="global-level" type="radio" name="global" value="5">
+
+    <br>
+    <br>
+
+    <h4>Module specific settings</h4>
+
+    <table id="modules-table">
+      <thead>
+        <th>Module name</th>
+        <th>All / Trace</th>
+        <th>Debug</th>
+        <th>Info</th>
+        <th>Warn</th>
+        <th>Error</th>
+        <th>Fatal / Off</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <br>
+
+    <h4>Logger debugging</h4>
+
+    <input id="debug-message" type="text" value="Message to log in console.">
+    <button id="trigger-all">LOG</button>
+    <label for="clear-console">Clear console</label>
+    <input id="clear-console" type="checkbox" checked>
+
+    <br>
+
+    <input id="logger-name" type="text">
+    <button id="add-logger">Add logger</button>
+  </div>
+<script type="text/javascript" src="manifest.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 
 </html>

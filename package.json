@@ -25,6 +25,7 @@
   },
   "scripts": {
     "build": "webpack --config ./build/webpack.prod.js --progress",
+    "build.docs": "webpack --config ./build/webpack.dev.js --progress",
     "build.watch": "webpack --config ./build/webpack.prod.js --progress --watch",
     "start": "NODE_ENV=dev node ./build/server.js"
   },

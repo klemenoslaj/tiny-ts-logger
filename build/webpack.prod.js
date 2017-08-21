@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const Merge = require('webpack-merge');
 const CommonConfig = require('./webpack.common.js');
@@ -16,7 +17,8 @@ module.exports = Merge(CommonConfig, {
             commonjs: "CommonJS Logger module",
             commonjs2: "CommonJS2 Logger module",
             amd: "AMD Logger module"
-        }
+        },
+        path: path.join(__dirname, '../dist')
     },
     devtool: 'cheap-module-source-map',
     plugins: [
