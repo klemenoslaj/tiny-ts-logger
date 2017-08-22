@@ -1,6 +1,6 @@
 {
   "name": "tiny-ts-logger",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "TypeScript logger with the support of multiple modules at different log levels",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

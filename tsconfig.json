@@ -9,6 +9,8 @@
             "es2017",
             "dom"
         ],
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "alwaysStrict": true,
         "sourceMap": true,
         "declaration": true,
