@@ -1,6 +1,6 @@
 /**
  * Tiny TypeScript Logger
- * v1.0.0
+ * v2.0.0
  */
 export type consoleArgument = string | number | boolean | symbol | object;
 export type createMethod = (methodName: string) => Logger;
