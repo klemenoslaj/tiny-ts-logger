@@ -3,7 +3,7 @@
  * v2.0.0
  */
 export type consoleArgument = string | number | boolean | symbol | object;
-export type createMethod = (methodName: string) => Logger;
+export type createMethod = (moduleName: string) => Logger;
 export enum LEVEL { OFF = 5, ALL = 0, TRACE = 0, LOG, INFO, WARN, ERROR, FATAL }
 const modules: { [moduleName: string]: Logger } = {};
 const modulesMap: Map<Logger, { level: LEVEL; moduleName: string; }> = new Map();
