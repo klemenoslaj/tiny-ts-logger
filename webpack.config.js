@@ -4,7 +4,8 @@ module.exports = {
     entry: path.join(__dirname, '/lib/index.ts'),
     output: {
         filename: './dist/index.js',
-        path: __dirname
+        path: __dirname,
+        libraryTarget: "umd"
     },
     module: {
         rules: [
