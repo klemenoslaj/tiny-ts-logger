@@ -15,10 +15,10 @@ class Console {
         [LEVEL.FATAL]: 'console__fatal'
     };
 
-    public print(level: LEVEL, message: string, args: consoleArgument[]): this {
+    public print(level: LEVEL, args: consoleArgument[]): this {
         const paragraph: HTMLParagraphElement = document.createElement('p');
         paragraph.classList.add(this.classMap[level]);
-        paragraph.innerText = `${message} ${args.join(' ')}`;
+        paragraph.innerText = `${args.join(' ')}`;
         this.element.appendChild(paragraph);
 
         return this;
@@ -36,72 +36,24 @@ class Console {
 }
 
 class CustomLogger extends Logger {
+    public static readonly global: Logger = new CustomLogger('global');
     public static readonly console: Console = new Console();
 
     // tslint:disable-next-line
-    public static PARSE_MESSAGE(moduleName: string, level: LEVEL): string {
-        return `"${moduleName}" - ${LEVEL[level]} - `;
+    public static parseMessage(moduleName: string, level: LEVEL): string {
+        return `[${moduleName}] - ${LEVEL[level]} - `;
     }
 
-    public static CLEAR(): void {
-        Logger.CLEAR();
-        this.console.clear();
+    public clear(): void {
+        super.clear();
+        CustomLogger.console.clear();
     }
 
-    public trace(...args: consoleArgument[]): boolean {
-        const isValid: boolean = super.trace(...args);
+    protected makeLog(level: LEVEL, args: consoleArgument[]): consoleArgument[] {
+        const consoleArgs: consoleArgument[] = super.makeLog(level, args);
+        CustomLogger.console.print(level, consoleArgs);
 
-        if (isValid) {
-            CustomLogger.console.print(LEVEL.TRACE, this.parsePrefix(LEVEL.TRACE), args);
-        }
-
-        return isValid;
-    }
-
-    public log(...args: consoleArgument[]): boolean {
-        const isValid: boolean = super.log(...args);
-
-        if (isValid) {
-            CustomLogger.console.print(LEVEL.LOG, this.parsePrefix(LEVEL.LOG), args);
-        }
-
-        return isValid;
-    }
-
-    public info(...args: consoleArgument[]): boolean {
-        const isValid: boolean = super.info(...args);
-
-        if (isValid) {
-            CustomLogger.console.print(LEVEL.INFO, this.parsePrefix(LEVEL.INFO), args);
-        }
-
-        return isValid;
-    }
-
-    public warn(...args: consoleArgument[]): boolean {
-        const isValid: boolean = super.warn(...args);
-
-        if (isValid) {
-            CustomLogger.console.print(LEVEL.WARN, this.parsePrefix(LEVEL.WARN), args);
-        }
-
-        return isValid;
-    }
-
-    public error(...args: consoleArgument[]): boolean {
-        const isValid: boolean = super.error(...args);
-
-        if (isValid) {
-            CustomLogger.console.print(LEVEL.ERROR, this.parsePrefix(LEVEL.ERROR), args);
-        }
-
-        return isValid;
-    }
-
-    public fatal(...args: consoleArgument[]): boolean {
-        CustomLogger.console.print(LEVEL.FATAL, this.parsePrefix(LEVEL.FATAL), args);
-
-        return super.fatal(...args);
+        return consoleArgs;
     }
 }
 
@@ -132,17 +84,17 @@ function logAll(event?: Event): void {
     }
 
     if (clearChexbox.checked) {
-        CustomLogger.CLEAR();
+        CustomLogger.global.clear();
     }
 
-    CustomLogger.SET_GLOBAL_LEVEL(+globalLevel.value);
+    CustomLogger.setGlobalLevel(+globalLevel.value);
 
     modules.forEach((loggerName: string) => {
-        const logger: CustomLogger = CustomLogger.CREATE(loggerName);
+        const logger: CustomLogger = CustomLogger.create(loggerName);
         const radio: HTMLInputElement = <HTMLInputElement>moduleRows[loggerName].querySelector('input[type=radio]:checked');
         const message: string = (<HTMLInputElement>document.getElementById('debug-message')).value;
 
-        logger.level(+radio.value);
+        logger.setLevel(+radio.value);
 
         logger.trace(message);
         logger.log(message);
@@ -157,7 +109,7 @@ function clearAllOnClick(event: Event): void {
     event.preventDefault();
     event.stopPropagation();
 
-    CustomLogger.CLEAR();
+    CustomLogger.global.clear();
 }
 
 function createModuleOnClick(event: Event): void {
@@ -183,7 +135,7 @@ function createModule(loggerName: string): void {
             .filter((key: string) => Number.isNaN(+LEVEL[key]))
             .forEach((key: string) => {
                 const radioCell: HTMLTableDataCellElement = document.createElement('td');
-                const radio: HTMLButtonElement = document.createElement('input');
+                const radio: HTMLInputElement = document.createElement('input');
 
                 radio.type = 'radio';
                 radio.name = loggerName.split(' ').join('_');

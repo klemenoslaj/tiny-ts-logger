@@ -22,7 +22,7 @@ Logger.global.error('And this is error message');
 ```javascript
 import { Logger } from 'tiny-ts-logger';
 
-const moduleLogger = Logger.CREATE('moduleName');
+const moduleLogger = Logger.create('moduleName');
 
 moduleLogger.log('This is log message');
 moduleLogger.error('And this is error message');
@@ -33,9 +33,9 @@ moduleLogger.error('And this is error message');
 import { Logger, LEVEL } from 'tiny-ts-logger';
 
 const globalLogger = Logger.global;
-const moduleLogger = Logger.CREATE('moduleName');
+const moduleLogger = Logger.create('moduleName');
 
-Logger.SET_GLOBAL_LEVEL(LEVEL.WARN);
+Logger.setGlobalLevel(LEVEL.WARN);
 
 globalLogger.log('This log message will be ignored! WARN > LOG');
 moduleLogger.log('This log message will be ignored! WARN > LOG');
@@ -49,44 +49,77 @@ moduleLogger.error('This log message will be logged! WARN < ERROR');
 import { Logger, LEVEL } from 'tiny-ts-logger';
 
 const globalLogger = Logger.global;
-const moduleLogger = Logger.CREATE('moduleName');
+const moduleLogger = Logger.create('moduleName');
 
-moduleLogger.level(LEVEL.WARN);
+moduleLogger.setLevel(LEVEL.WARN);
 
 globalLogger.log('This log message will be logged! Not affected by module level');
 moduleLogger.log('This log message will be ignored! WARN > LOG');
 moduleLogger.error('This log message will be logged! WARN == WARN');
 ```
 
-### Check if log was blocked
+### Check if log will be ignored
 ```javascript
 import { Logger, LEVEL } from 'tiny-ts-logger';
 
 const globalLogger = Logger.global;
-const moduleLogger = Logger.CREATE('moduleName');
+const moduleLogger = Logger.create('moduleName');
 
 moduleLogger.level(LEVEL.WARN);
 
-if (moduleLogger.log('This log is blocked by log level!')) {
-    // Log was blocked
+if (!moduleLogger.isValid(LEVEL.LOG)) {
+    // moduleLogger.log() will be ignored
 }
 ```
 
 ## Extensibility
 ```javascript
-import { Logger } from 'tiny-ts-logger';
+import { Logger, consoleArgument } from 'tiny-ts-logger';
 
-class CustomLogger extends Logger {
-    static PARSE_MESSAGE(moduleName, level, logger) {
-        return 'Prefix - ';
+/**
+ * This class demonstrates a simple derived class from base Logger
+ */
+class CustomLogger2 extends Logger {
+    /**
+     * Overriding the standard(empty) parse message,
+     * that gets atached in front of every log message
+     */
+    public static parseMessage(moduleName: string, level: LEVEL, _logger: CustomLogger2): string {
+        return `[${moduleName}] - ${LEVEL[level]} - `;
     }
 
-    fatal(...args) {
-        super.fatal(...args);
-        // Do something different
-        // e.g. Log to server
+    /**
+     * Overriding the standard method with a custom behavior
+     */
+    public log(...args: consoleArgument[]): void {
+        // Now intentionally ignoring validity of log level
+        this.makeLog(LEVEL.LOG, args);
+    }
 
-        return true;
+    /**
+     * Overriding the standard isValid check to allow logging
+     * of current active level only
+     */
+    public isValid(level: LEVEL): boolean {
+        return level === this.level;
+    }
+
+    /**
+     * Overriding the standard logging mechanism.
+     * For LEVEL.FATAL we call alert() instead of console.error()
+     */
+    protected makeLog(level: LEVEL, args: consoleArgument[]): consoleArgument[] {
+        const consoleArgs: consoleArgument[] = [this.parseMessage(level), ...args];
+
+        switch (level) {
+            case LEVEL.FATAL:
+                alert(consoleArgs.join(', '));
+                break;
+            default:
+                console[LEVEL[level].toLowerCase()](...consoleArgs);
+        }
+
+        return consoleArgs;
     }
 }
 ```

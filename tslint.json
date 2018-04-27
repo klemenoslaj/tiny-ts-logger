@@ -5,7 +5,8 @@
     ],
     "rules" : {
         "no-relative-imports": [false],
-        "no-console": [false]
+        "no-console": [false],
+        "function-name": [false]
     },
     "rulesDirectory" : [
         "./node_modules/tslint-microsoft-contrib"

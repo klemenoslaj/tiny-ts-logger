@@ -1,9 +1,8 @@
 /**
  * Tiny TypeScript Logger
- * v1.0.0
+ * v2.0.0
  */
 export declare type consoleArgument = string | number | boolean | symbol | object;
-export declare type createMethod = (methodName: string) => Logger;
 export declare enum LEVEL {
     OFF = 5,
     ALL = 0,
@@ -16,18 +15,22 @@ export declare enum LEVEL {
 }
 export declare class Logger {
     static readonly global: Logger;
-    constructor(moduleName: string);
-    static PARSE_MESSAGE(_moduleName: string, _level: LEVEL, _logger: Logger): string;
-    static readonly CLEAR: () => void;
-    static readonly SET_GLOBAL_LEVEL: (level?: LEVEL) => LEVEL;
-    static readonly CREATE: createMethod;
-    level(level: LEVEL): this;
-    trace(...args: consoleArgument[]): boolean;
-    log(...args: consoleArgument[]): boolean;
-    info(...args: consoleArgument[]): boolean;
-    warn(...args: consoleArgument[]): boolean;
-    error(...args: consoleArgument[]): boolean;
-    fatal(...args: consoleArgument[]): boolean;
-    protected parsePrefix(level: LEVEL): string;
-    private logIfValid(level, args);
+    protected constructor(moduleName: string);
+    static parseMessage(_moduleName: string, _level: LEVEL, _logger: Logger): string;
+    static setGlobalLevel(level?: LEVEL): LEVEL;
+    static create<T extends Logger>(this: typeof Logger, moduleName: string): T;
+    readonly level: LEVEL;
+    readonly moduleName: string;
+    setLevel(level: LEVEL): this;
+    trace(...args: consoleArgument[]): void;
+    log(...args: consoleArgument[]): void;
+    info(...args: consoleArgument[]): void;
+    warn(...args: consoleArgument[]): void;
+    error(...args: consoleArgument[]): void;
+    fatal(...args: consoleArgument[]): void;
+    clear(): void;
+    isValid(level: LEVEL): boolean;
+    protected logWithLevel(level: LEVEL, args: consoleArgument[]): void;
+    protected makeLog(level: LEVEL, args: consoleArgument[]): consoleArgument[];
+    protected parseMessage(level: LEVEL): string;
 }
