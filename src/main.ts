@@ -2,7 +2,7 @@
  * Testing and demonstration of Tiny Logger
  */
 
-import { consoleArgument, LEVEL, Logger } from './index';
+import { consoleArgument, LEVEL, Logger } from '../lib/index';
 
 class Console {
     public readonly element: HTMLElement = document.getElementById('console');
@@ -132,7 +132,7 @@ function createModule(loggerName: string): void {
         tableRow.appendChild(moduleCell);
 
         Object.keys(LEVEL)
-            .filter((key: string) => Number.isNaN(+LEVEL[key]))
+            .filter((key: string) => Number.isNaN(+LEVEL[+key]))
             .forEach((key: string) => {
                 const radioCell: HTMLTableDataCellElement = document.createElement('td');
                 const radio: HTMLInputElement = document.createElement('input');

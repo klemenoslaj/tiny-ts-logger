@@ -88,7 +88,7 @@ export class Logger {
                 console.error(...consoleArgs);
                 break;
             default:
-                console[LEVEL[level].toLowerCase()](...consoleArgs);
+                (<any>console)[LEVEL[level].toLowerCase()](...consoleArgs);
         }
 
         return consoleArgs;

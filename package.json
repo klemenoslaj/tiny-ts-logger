@@ -1,6 +1,6 @@
 {
   "name": "tiny-ts-logger",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "TypeScript logger with the support of multiple modules at different log levels",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,22 +12,17 @@
     "ts-logger"
   ],
   "devDependencies": {
-    "awesome-typescript-loader": "^3.2.2",
-    "html-webpack-plugin": "^2.30.1",
-    "source-map-loader": "^0.2.3",
-    "tslint": "^5.9.1",
-    "tslint-loader": "^3.6.0",
-    "tslint-microsoft-contrib": "^5.0.3",
+    "html-webpack-plugin": "^3.2.0",
+    "ts-loader": "^4.2.0",
     "typescript": "^2.8.3",
-    "webpack": "^3.5.2",
-    "webpack-dev-server": "^2.4.1",
-    "webpack-merge": "^4.1.2"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3"
   },
   "scripts": {
-    "build": "webpack --config ./build/webpack.prod.js --progress",
-    "build.docs": "webpack --config ./build/webpack.dev.js --progress",
-    "build.watch": "webpack --config ./build/webpack.prod.js --progress --watch",
-    "start": "NODE_ENV=dev node ./build/server.js"
+    "build": "webpack-cli --mode production",
+    "build.docs": "webpack-cli --config webpack.docs.js --mode production",
+    "start": "webpack-dev-server --config webpack.docs.js --mode development --watch"
   },
   "repository": {
     "type": "git",
