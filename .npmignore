@@ -1,11 +1,13 @@
-build
-node_modules
 docs
+lib
+node_modules
 src
-
 .gitignore
 .npmignore
-
+tsconfig.docs.json
 tsconfig.json
 tslint.json
+webpack.config.js
+webpack.docs.js
 yarn.lock
+tiny-ts-logger-*
