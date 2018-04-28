@@ -58,7 +58,7 @@ moduleLogger.log('This log message will be ignored! WARN > LOG');
 moduleLogger.error('This log message will be logged! WARN == WARN');
 ```
 
-### Check if log will be ignored
+#### Check if log will be ignored
 ```javascript
 import { Logger, LEVEL } from 'tiny-ts-logger';
 
