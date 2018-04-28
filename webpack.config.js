@@ -5,7 +5,8 @@ module.exports = {
     output: {
         filename: './dist/index.js',
         path: __dirname,
-        libraryTarget: "umd"
+        libraryTarget: "umd",
+        globalObject: 'this'
     },
     module: {
         rules: [
