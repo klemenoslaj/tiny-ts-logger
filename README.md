@@ -79,12 +79,12 @@ import { Logger, consoleArgument } from 'tiny-ts-logger';
 /**
  * This class demonstrates a simple derived class from base Logger
  */
-class CustomLogger2 extends Logger {
+class CustomLogger extends Logger {
     /**
      * Overriding the standard(empty) parse message,
      * that gets atached in front of every log message
      */
-    public static parseMessage(moduleName: string, level: LEVEL, _logger: CustomLogger2): string {
+    public static parseMessage(moduleName: string, level: LEVEL, _logger: CustomLogger): string {
         return `[${moduleName}] - ${LEVEL[level]} - `;
     }
 
