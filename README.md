@@ -81,6 +81,13 @@ import { Logger, consoleArgument } from 'tiny-ts-logger';
  */
 class CustomLogger extends Logger {
     /**
+     * Overriding the default name of global logger
+     */
+    public static get global(this: typeof Logger): Logger {
+        return this.create('custom-global-name');
+    }
+
+    /**
      * Overriding the standard(empty) parse message,
      * that gets atached in front of every log message
      */
