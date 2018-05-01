@@ -83,7 +83,7 @@ class CustomLogger extends Logger {
     /**
      * Overriding the default name of global logger
      */
-    public static get global(this: typeof Logger): Logger {
+    public static get global(this: typeof CustomLogger): Logger {
         return this.create('custom-global-name');
     }
 
