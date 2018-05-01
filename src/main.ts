@@ -1,7 +1,6 @@
 /**
  * Testing and demonstration of Tiny Logger
  */
-
 import { consoleArgument, LEVEL, Logger } from '../lib/index';
 
 class Console {
@@ -36,12 +35,15 @@ class Console {
 }
 
 class CustomLogger extends Logger {
-    public static readonly global: Logger = new CustomLogger('global');
     public static readonly console: Console = new Console();
+    public static get global(this: typeof Logger): Logger {
+        return this.create('new-global');
+    }
 
     // tslint:disable-next-line
     public static parseMessage(moduleName: string, level: LEVEL): string {
-        return `[${moduleName}] - ${LEVEL[level]} - `;
+        const now = new Date();
+        return `${LEVEL[level]} \t[${now.toLocaleDateString()} ${now.toLocaleTimeString()}] - [${moduleName}] -`;
     }
 
     public clear(): void {
@@ -132,7 +134,7 @@ function createModule(loggerName: string): void {
         tableRow.appendChild(moduleCell);
 
         Object.keys(LEVEL)
-            .filter((key: string) => Number.isNaN(+LEVEL[key]))
+            .filter((key: string) => Number.isNaN(+LEVEL[<any>key]))
             .forEach((key: string) => {
                 const radioCell: HTMLTableDataCellElement = document.createElement('td');
                 const radio: HTMLInputElement = document.createElement('input');

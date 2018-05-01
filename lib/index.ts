@@ -8,8 +8,14 @@ const modules: { [moduleName: string]: Logger } = {};
 const modulesMap: Map<Logger, { level: LEVEL; moduleName: string }> = new Map();
 let loggerLevel: LEVEL = LEVEL.ALL;
 
+interface LoggerConsole extends Console {
+    [method: string]: (...args: consoleArgument[]) => void;
+}
+
 export class Logger {
-    public static readonly global: Logger = modules.global = new Logger('global');
+    public static get global(this: typeof Logger): Logger {
+        return this.create('global');
+    }
 
     protected constructor(moduleName: string) {
         modulesMap.set(this, { moduleName, level: LEVEL.ALL });
@@ -88,7 +94,7 @@ export class Logger {
                 console.error(...consoleArgs);
                 break;
             default:
-                console[LEVEL[level].toLowerCase()](...consoleArgs);
+                (<LoggerConsole>console)[LEVEL[level].toLowerCase()](...consoleArgs);
         }
 
         return consoleArgs;

@@ -10,6 +10,7 @@
         ],
         "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "noImplicitAny": true,
         "alwaysStrict": true,
         "sourceMap": true,
         "declaration": true,
