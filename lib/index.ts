@@ -1,6 +1,6 @@
 /**
  * Tiny TypeScript Logger
- * v2.0.0
+ * v3.1.0
  */
 export type consoleArgument = string | number | boolean | symbol | object;
 export enum LEVEL { OFF = 5, ALL = 0, TRACE = 0, LOG, INFO, WARN, ERROR, FATAL }
